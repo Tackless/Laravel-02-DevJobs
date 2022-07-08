@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\VacanteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', [VacanteController::class, 'index'] )->middleware(['auth', 'verified'])->name('dashboard'); // verified para comprobar que este verificado
+Route::get('/dashboard', [VacanteController::class, 'index'] )->middleware(['auth', 'verified'])->name('vacantes.index'); // verified para comprobar que este verificado
 
 require __DIR__.'/auth.php';
