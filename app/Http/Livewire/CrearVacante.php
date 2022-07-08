@@ -10,6 +10,7 @@ class CrearVacante extends Component
 {
     public $titulo;
     public $salario;
+    public $categoria;
     public $empresa;
     public $ultimo_dia;
     public $descripcion;
@@ -25,6 +26,11 @@ class CrearVacante extends Component
         'descripcion' => 'required',
         'imagen' => 'required',
     ];
+
+    public function crearVacante()
+    {
+        $datos = $this->validate();
+    }
 
     public function render()
     {
