@@ -18,6 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', [VacanteController::class, 'index'] )->middleware(['auth', 'verified'])->name('vacantes.index'); // verified para comprobar que este verificado
+Route::get('/vacantes', [VacanteController::class, 'index'] )->middleware(['auth', 'verified'])->name('vacantes.index'); // verified para comprobar que este verificado
+Route::get('/vacantes/create', [VacanteController::class, 'create'] )->middleware(['auth', 'verified'])->name('vacantes.create');
 
 require __DIR__.'/auth.php';
