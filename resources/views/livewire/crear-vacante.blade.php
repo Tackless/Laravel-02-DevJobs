@@ -3,6 +3,10 @@
         <x-label for="titulo" :value="__('Titulo Vacante')" />
 
         <x-input id="titulo" class="block mt-1 w-full" type="text" wire:model="titulo" :value="old('titulo')" placeholder="Titulo Vacante"/>
+
+        @error('titulo')
+            <livewire:mostrar-alerta :message="$message" />
+        @enderror
     </div>
 
     <div class="">
@@ -14,6 +18,10 @@
                 <option value="{{ $salario->id }}">{{ $salario->salario }}</option>
             @endforeach
         </select>
+
+        @error('salario')
+            <livewire:mostrar-alerta :message="$message" />
+        @enderror
     </div>
 
     <div class="">
@@ -25,30 +33,50 @@
                 <option value="{{ $categoria->id }}">{{ $categoria->categoria }}</option>
             @endforeach
         </select>
+        
+        @error('categoria')
+            <livewire:mostrar-alerta :message="$message" />
+        @enderror
     </div>
 
     <div class="">
         <x-label for="empresa" :value="__('Empresa')" />
 
         <x-input id="empresa" class="block mt-1 w-full" type="text" wire:model="empresa" :value="old('empresa')" placeholder="Empresa ej. Netflix, Uber, Microsoft"/>
+
+        @error('empresa')
+            <livewire:mostrar-alerta :message="$message" />
+        @enderror
     </div>
 
     <div class="">
         <x-label for="ultimo_dia" :value="__('Último día para postularse')" />
 
         <x-input id="ultimo_dia" class="block mt-1 w-full" type="date" wire:model="ultimo_dia" :value="old('ultimo_dia')"/>
+
+        @error('ultimo_dia')
+            <livewire:mostrar-alerta :message="$message" />
+        @enderror
     </div>
 
     <div class="">
         <x-label for="descripcion" :value="__('Descripción Puesto')" />
 
         <textarea wire:model="descripcion" id="descripcion" class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-full h-72" placeholder="Descripción general del puesto, experiencia..."></textarea>
+
+        @error('descripcion')
+            <livewire:mostrar-alerta :message="$message" />
+        @enderror
     </div>
 
     <div class="">
         <x-label for="imagen" :value="__('Imagen Vacante')" />
 
         <x-input id="imagen" class="block mt-1 w-full" type="file" wire:model="imagen"/>
+
+        @error('imagen')
+            <livewire:mostrar-alerta :message="$message" />
+        @enderror
     </div>
 
     <x-button>
