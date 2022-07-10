@@ -25,9 +25,12 @@
                         Editar
                     </a>
     
-                    <a href="#" class="bg-red-600 py-2 px-4 rounded-lg text-white text-xs font-bold uppercase text-center">
+                    <button 
+                        wire:click="$emit('prueba', {{ $vacante->id }})" {{-- Para escuchar por un evento --}}
+                        class="bg-red-600 py-2 px-4 rounded-lg text-white text-xs font-bold uppercase text-center"
+                    >
                         Eliminar
-                    </a>
+                    </button>
                 </div>
             </div>
         @empty
@@ -45,25 +48,30 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-    Swal.fire({
-        title: '¿Eliminar Vacante?',
-        text: "Una vacante eliminada no se puede recuperar",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Sí, ¡Eliminar!',
-        cancelButtonText: 'Cancelar'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire(
-                'Deleted!',
-                'Your file has been deleted.',
-                'success'
-                )
-            }
-        }
-    )
+
+    Livewire.on('prueba', vacanteId => {
+        alert(vacanteId);
+    });
+
+    // Swal.fire({
+    //     title: '¿Eliminar Vacante?',
+    //     text: "Una vacante eliminada no se puede recuperar",
+    //     icon: 'warning',
+    //     showCancelButton: true,
+    //     confirmButtonColor: '#3085d6',
+    //     cancelButtonColor: '#d33',
+    //     confirmButtonText: 'Sí, ¡Eliminar!',
+    //     cancelButtonText: 'Cancelar'
+    //     }).then((result) => {
+    //         if (result.isConfirmed) {
+    //             Swal.fire(
+    //             'Deleted!',
+    //             'Your file has been deleted.',
+    //             'success'
+    //             )
+    //         }
+    //     }
+    // )
 </script>
 
 
