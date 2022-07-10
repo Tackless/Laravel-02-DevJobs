@@ -10,6 +10,7 @@ use Illuminate\Support\Carbon;
 
 class EditarVacante extends Component
 {
+    public $vacante_id;
     public $titulo;
     public $salario;
     public $categoria;
@@ -30,18 +31,39 @@ class EditarVacante extends Component
     // Actualizar los cambios
     public function mount(Vacante $vacante )
     {
-        $this->titulo = $vacante->titulo;
-        $this->salario = $vacante->salario_id;
-        $this->categoria = $vacante->categoria_id;
-        $this->empresa = $vacante->empresa;
-        $this->ultimo_dia = Carbon::parse( $vacante->ultimo_dia )->format('Y-m-d'); 
-        $this->descripcion = $vacante->descripcion;
-        $this->imagen = $vacante->imagen;
+        $this->vacante_id               =       $vacante->id;
+        $this->titulo           =       $vacante->titulo;
+        $this->salario          =       $vacante->salario_id;
+        $this->categoria        =       $vacante->categoria_id;
+        $this->empresa          =       $vacante->empresa;
+        $this->ultimo_dia       =       Carbon::parse( $vacante->ultimo_dia )->format('Y-m-d'); 
+        $this->descripcion      =       $vacante->descripcion;
+        $this->imagen           =       $vacante->imagen;
     }
 
     public function editarVacante()
     {
         $datos = $this->validate();
+
+        // Si hay una imagen nueva
+
+        // Encontrar la vacante a editar
+        $vacante = Vacante::find($this->vacante_id);
+
+        // Asignar los valores
+        $vacante->titulo = $datos['titulo'];
+        $vacante->salario_id = $datos['salario'];
+        $vacante->categoria_id = $datos['categoria'];
+        $vacante->empresa = $datos['empresa'];
+        $vacante->ultimo_dia = $datos['ultimo_dia'];
+        $vacante->descripcion = $datos['descripcion'];
+
+        // Guardar la vacante
+        $vacante->save();
+
+        // redireccionar
+        session()->flash('mensaje', 'La Vacante ' . $vacante->titulo . ' se actualizó correctamente');
+        return redirect()->route('vacantes.index');
     }
 
     public function render()
