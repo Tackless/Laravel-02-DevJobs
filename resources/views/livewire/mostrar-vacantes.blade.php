@@ -33,3 +33,7 @@
         <p class="text-center p-3 text-sm text-gray-600">No hay Vacantes que mostrar</p>
     @endforelse
 </div>
+
+<div class="mt-10">
+    {{ $vacantes->links() }}
+</div>
