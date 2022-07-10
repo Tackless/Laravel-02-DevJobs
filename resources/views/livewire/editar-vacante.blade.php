@@ -1,4 +1,4 @@
-<form action="" class="md:w-1/2 space-y-5" wire:submit.prevent="crearVacante"> {{-- wire:submit.prevent="crearVacante" para comunicar con el controlador --}}
+<form action="" class="md:w-1/2 space-y-5" wire:submit.prevent="editarVacante"> {{-- wire:submit.prevent="crearVacante" para comunicar con el controlador --}}
     <div class="">
         <x-label for="titulo" :value="__('Titulo Vacante')" />
 
