@@ -7,6 +7,7 @@ use App\Models\Vacante;
 use Livewire\Component;
 use App\Models\Categoria;
 use Illuminate\Support\Carbon;
+use Livewire\WithFileUploads;
 
 class EditarVacante extends Component
 {
@@ -18,6 +19,9 @@ class EditarVacante extends Component
     public $ultimo_dia;
     public $descripcion;
     public $imagen;
+    public $imagen_nueva;
+
+    use WithFileUploads; // Para agregar imagenes
 
     protected $rules = [
         'titulo' => 'required|string',
@@ -26,6 +30,7 @@ class EditarVacante extends Component
         'empresa' => 'required',
         'ultimo_dia' => 'required',
         'descripcion' => 'required',
+        'imagen_nueva' => 'nullable|image|max:1024',
     ];
 
     // Actualizar los cambios
@@ -46,17 +51,22 @@ class EditarVacante extends Component
         $datos = $this->validate();
 
         // Si hay una imagen nueva
+        if ($this->imagen_nueva) {
+            $imagen = $this->imagen_nueva->store('public/vacantes');
+            $datos['imagen'] = str_replace('public/vacantes/', '', $imagen);
+        }
 
         // Encontrar la vacante a editar
         $vacante = Vacante::find($this->vacante_id);
 
         // Asignar los valores
-        $vacante->titulo = $datos['titulo'];
-        $vacante->salario_id = $datos['salario'];
-        $vacante->categoria_id = $datos['categoria'];
-        $vacante->empresa = $datos['empresa'];
-        $vacante->ultimo_dia = $datos['ultimo_dia'];
-        $vacante->descripcion = $datos['descripcion'];
+        $vacante->titulo        =   $datos['titulo'];
+        $vacante->salario_id    =   $datos['salario'];
+        $vacante->categoria_id  =   $datos['categoria'];
+        $vacante->empresa       =   $datos['empresa'];
+        $vacante->ultimo_dia    =   $datos['ultimo_dia'];
+        $vacante->descripcion   =   $datos['descripcion'];
+        $vacante->imagen        =   $datos['imagen'] ?? $vacante->imagen;
 
         // Guardar la vacante
         $vacante->save();

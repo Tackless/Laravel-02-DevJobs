@@ -72,22 +72,22 @@
     <div class="">
         <x-label for="imagen" :value="__('Imagen Vacante')" />
 
-        <x-input id="imagen" class="block mt-1 w-full" type="file" wire:model="imagen" accept="image/*" />
+        <x-input id="imagen" class="block mt-1 w-full" type="file" wire:model="imagen_nueva" accept="image/*" />
 
         <div class="my-5 w-80">
-            <x-label :value="__('Imagen Actual')" />
+            <x-label :value="__('Imagen Actual:')" />
 
             <img src="{{ asset('storage/vacantes/' . $imagen) }}" alt="{{ 'Imagen de la vacante ' . $titulo }}" class="">
         </div>
 
-        {{-- <div class="my-5 w-80">
-            @if ($imagen)
-                Imagen:
-                <img src="{{ $imagen->temporaryUrl() }}" alt="Image Preview">
+        <div class="my-5 w-80">
+            @if ($imagen_nueva)
+            <x-label :value="__('Imagen Nueva:')" />
+                <img src="{{ $imagen_nueva->temporaryUrl() }}" alt="Image Preview">
             @endif
-        </div> --}}
+        </div>
 
-        @error('imagen')
+        @error('imagen_nueva')
             <livewire:mostrar-alerta :message="$message" />
         @enderror
     </div>
