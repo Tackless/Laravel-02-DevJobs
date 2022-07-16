@@ -27,6 +27,12 @@
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 @auth
+                    @if (auth()->user()->rol === 2)
+                        <a href=" {{ route('notificaciones') }} " class="mr-2 w-7 h-7 bg-indigo-600 hover:bg-indigo-800 rounded-full flex flex-col justify-center items-center text-sm font-extrabold text-white">
+                            {{ Auth::user()->unreadNotifications->count() }}
+                        </a>
+                    @endif
+
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             <button class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
