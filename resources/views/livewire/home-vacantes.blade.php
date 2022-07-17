@@ -15,6 +15,14 @@
                             <p class=" text-base text-gray-600 mb-1">
                                 {{ $vacante->empresa }}
                             </p>
+                            
+                            <p class=" text-xs font-bold text-gray-600 mb-1">
+                                {{ $vacante->categoria->categoria }}
+                            </p>
+                            
+                            <p class=" text-base text-gray-600 mb-1">
+                                {{ $vacante->salario->salario }}
+                            </p>
 
                             <div class="text-xs text-gray-600">
                                 Último día para postularse:
@@ -34,7 +42,7 @@
                     <p class="p-3 text-center text-sm text-gray-600">No hay vacantes aún</p>
                 @endforelse
             </div>
-            
+
             <div class="mt-10">
                 {{ $vacantes->links() }}
             </div>    

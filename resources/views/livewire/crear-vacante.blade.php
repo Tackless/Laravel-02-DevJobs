@@ -76,7 +76,7 @@
 
         <div class="my-5 w-80">
             @if ($imagen)
-                Imagen:
+            <x-label :value="__('Imagen:')" />
                 <img src="{{ $imagen->temporaryUrl() }}" alt="Image Preview">
             @endif
         </div>
