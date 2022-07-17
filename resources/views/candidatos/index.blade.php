@@ -10,6 +10,37 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <h1 class="text-2xl font-bold text-center my-10">Candidatos para la vacante: {{ $vacante->titulo }} </h1>
+
+                    <div class="md:flex md:justify-center p-5">
+                        <ul class="divide-y divide-gray-200 w-full">
+                            @forelse ($vacante->candidatos as $candidato)
+                                <li class="flex items-center p-3">
+                                    <div class="flex-1">
+                                        <p class="text-xl font-medium text-gray-800">
+                                            {{ $candidato->user->name }}
+                                        </p>
+
+                                        <p class="text-sm font-medium text-gray-600">
+                                            {{ $candidato->user->email }}
+                                        </p>
+
+                                        <p class="text-sm font-medium text-gray-600">
+                                            Se postuló <span class="font-bold">{{ $candidato->created_at->diffForHumans() }}</span>
+                                        </p>
+                                    </div>
+
+                                    <div class="">
+                                        <a rel="noreferrer noopener" target="_blank" href=" {{ asset('storage/cv/' . $candidato->cv) }} " class=" inline-flex items-center shadow-sm px-2.5 py-0.5 border border-gray-300 text-sm leading-5 font-medium rounded-full text-gray-700 bg-white">
+                                            Ver CV
+                                        </a>
+                                    </div>
+                                </li>
+                            @empty
+                                <p class="p-3 text-center text-sm text-gray-600">No Hay Candidatos Aún</p>
+                            @endforelse
+                        </ul>
+                    </div>
+
                 </div>
             </div>
         </div>
